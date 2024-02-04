@@ -6,7 +6,7 @@
 The MotionPlanning project is a set of tools and algorithms allowing to plan, calculate and simulate movement of robotic limb in the Hexapod project. Module includes functions solving forward and inverse kinematics problems, generating trajectories within joint space and task space.
 Image below visualises currently used model of robotic limb.
 
-![Diagram of robot limb](doc\images\kinematics_diagram_without_text_light.png)
+![Diagram of robot limb](doc/images/kinematics_diagram_without_text_light.png)
 
 
 ## Structure of the Project
