@@ -1,38 +1,29 @@
-# Kinematics
+# MotionPlanning
 
 ## Overview
 
-The Kinematics project is a Python implementation of forward and reverse kinematics for robotic arms in "Hexapod" robot. The module includes essential functions for transforming matrices for translation and rotation in three-dimensional space, normalizing vectors in the special Euclidean group SE3, and a `RoboticArm` class modeling a simple three-segment robotic arm with servo joints.
 
-The codebase is succinct and prioritizes efficiency and precision through the use of the NumPy library for matrix operations and the math module for mathematical computations.
+The MotionPlanning project is a set of tools and algorithms allowing to plan, calculate and simulate movement of robotic limb in the Hexapod project. Module includes functions solving forward and inverse kinematics problems, generating trajectories within joint space and task space.
+Image below visualises currently used model of robotic limb.
 
-## Files in the Project
+![Diagram of robot limb](doc\images\kinematics_diagram_without_text_light.png)
 
-- `kinematics.py`: Central module providing kinematics functionality.
 
-- `test_kinematics.py`: Unit tests module for verifying the correctness of the kinematic algorithms.
+## Structure of the Project
 
-## Installation
+- `kinematics`: Central directory providing solvers for kinematics problems with its unitests.
 
-This project requires Python 3 and the `numpy` library. You can install the dependencies by running:
-
-```bash
-pip install numpy
-```
+- `trajectories`: Separate directory providing neccessary solvers generating trajectories for the limb using aforementioned kinematics solvers.
 
 ## Usage
 
 To make use of the kinematics module, you can import it in your existing project or run it standalone for custom computations.
 
 ```python
-from kinematics.kinematics import RoboticArm
+from kinematics.kinematics import KinematicsSolver
 ```
 
-### Main Features
-- **Forward Kinematics:** The `RoboticArm` class allows the user to simulate a three-segment robotic arm with the method `forward(q1, q2, q3)`
-- **Reverse Kinematics:** The `RoboticArm` class allows the user to compute angles in three-segment robotic arm in certain position. It can be done with the method `reverse(v)`
-
-## Running Tests
+<!-- ## Running Tests
 
 To run unit tests, navigate to the root directory of the project and execute:
 
@@ -40,4 +31,4 @@ To run unit tests, navigate to the root directory of the project and execute:
 pytest
 ```
 
-Please ensure that your Python environment has the required packages installed.
+Please ensure that your Python environment has the required packages installed. -->
