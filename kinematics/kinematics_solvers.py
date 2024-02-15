@@ -95,7 +95,7 @@ class KinematicsSolver:
         vector = np.array([0, 0, 0, 1])
 
         fcp = t_0_4 @ vector
-        return fcp[:2]
+        return fcp[:3]
 
     def inverse(self, p: np.ndarray) -> np.ndarray:
         """

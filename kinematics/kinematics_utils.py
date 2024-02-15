@@ -52,10 +52,10 @@ def homogeneous_transform_matrix(rotation: np.ndarray, translation: np.ndarray) 
     @param translation: 1x3 matrix, [dx, dy, dz]
     """
 
-    htm = np.array([[[*rotation[0], translation[0]],
+    htm = np.array([[*rotation[0], translation[0]],
                      [*rotation[1], translation[1]],
                      [*rotation[2], translation[2]],
-                     [0, 0, 0, 1]]])
+                     [0, 0, 0, 1]])
     return htm
 
 
