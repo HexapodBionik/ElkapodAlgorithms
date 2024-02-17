@@ -32,7 +32,7 @@ def test_2():
     a3 = np.array([1, 0, 0])
 
     leg = KinematicsSolver(m1, a1, a2, a3)
-    assert_allclose(leg.forward(np.array([0, 90, -90])), np.array([0, 0, -1]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([0, -90, -90])), np.array([0, 0, -1]), rtol=RTOL, atol=ATOL)
 
 def test_3():
     m1 = np.array([1.2, -0.5, 0.17])
