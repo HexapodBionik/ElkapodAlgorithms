@@ -60,7 +60,36 @@ def test_kinematics_improper_a3_initialization():
     with raises(AssertionError):
         kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
 
+def test_kinematics_improper_m1_translation():
+    m1 = np.array([1, 0, 0])
+    a1 = np.array([1 ,0 ,0])
+    a2 = np.array([1 ,0 ,0])
+    a3 = np.array([1 ,0 ,0])
+    with raises(AssertionError):
+        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
 
 
+def test_kinematics_improper_a1_translation():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([0, 0 ,1])
+    a2 = np.array([1, 0 ,0])
+    a3 = np.array([1, 0 ,0])
+    with raises(AssertionError):
+        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
 
+def test_kinematics_improper_a2_translation():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1 ,0 ,0])
+    a2 = np.array([0 ,0 ,1])
+    a3 = np.array([1 ,0 ,0])
+    with raises(AssertionError):
+        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+
+def test_kinematics_improper_a3_translation():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1 ,0 ,0])
+    a2 = np.array([1 ,0 ,0])
+    a3 = np.array([0 ,0 ,1])
+    with raises(AssertionError):
+        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
 
