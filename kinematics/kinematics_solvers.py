@@ -1,5 +1,7 @@
 import numpy as np
 from kinematics.kinematics_utils import homogeneous_transform_matrix, rot_z, rot_x
+from kinematics.kinematics_exceptions import (InvalidInitVectorElements, InvalidInitVectorShape, InvalidInitVectorLength,
+                                              InvalidInitVector)
 
 
 class KinematicsSolver:
@@ -21,6 +23,23 @@ class KinematicsSolver:
         self.a1 = a1
         self.a2 = a2
         self.a3 = a3
+
+    @staticmethod
+    def _check_vector_dimensions(vector: np.ndarray) -> None:
+        if not isinstance(vector, np.ndarray):
+            raise InvalidInitVector("Improper init vector type! Should be equal to np.ndarray!")
+        if vector.ndim != 1:
+            raise InvalidInitVectorShape("Improper vector shape! Ndim should be equal to 1!")
+        if len(vector) != 3:
+            raise InvalidInitVectorLength("Improper vector length! Vector length should equal to 3!")
+
+    @staticmethod
+    def _check_vector_numbers(vector: np.ndarray, scalar_index: int) -> None:
+        vector_indexes = [x for x in range(len(vector)) if x != scalar_index]
+        for index in vector_indexes:
+            if vector[index] != 0:
+                raise InvalidInitVectorElements(f"Invalid scalar's value! Scalar at index {index} should be equal to 0!")
+
         
     @property
     def a1(self) -> np.ndarray:
@@ -28,9 +47,9 @@ class KinematicsSolver:
     
     @a1.setter
     def a1(self, new_a1: np.ndarray) -> None:
-        assert new_a1.ndim == 1
-        assert len(new_a1) == 3
-        
+        self._check_vector_dimensions(new_a1)
+        self._check_vector_numbers(new_a1, scalar_index=0)
+
         self._a1 = new_a1
 
     @property
@@ -39,8 +58,8 @@ class KinematicsSolver:
 
     @a2.setter
     def a2(self, new_a2: np.ndarray) -> None:
-        assert new_a2.ndim == 1
-        assert len(new_a2) == 3
+        self._check_vector_dimensions(new_a2)
+        self._check_vector_numbers(new_a2, scalar_index=0)
 
         self._a2 = new_a2
 
@@ -50,8 +69,8 @@ class KinematicsSolver:
 
     @a3.setter
     def a3(self, new_a3: np.ndarray) -> None:
-        assert new_a3.ndim == 1
-        assert len(new_a3) == 3
+        self._check_vector_dimensions(new_a3)
+        self._check_vector_numbers(new_a3, scalar_index=0)
 
         self._a3 = new_a3
 
@@ -61,8 +80,8 @@ class KinematicsSolver:
 
     @m1.setter
     def m1(self, new_m1: np.ndarray) -> None:
-        assert new_m1.ndim == 1
-        assert len(new_m1) == 3
+        self._check_vector_dimensions(new_m1)
+        self._check_vector_numbers(new_m1, scalar_index=2)
 
         self._m1 = new_m1
 
