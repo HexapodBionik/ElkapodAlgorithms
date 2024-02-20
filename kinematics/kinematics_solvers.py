@@ -131,8 +131,8 @@ class KinematicsSolver:
         q1 = np.arctan2(y, x)
         l = np.sqrt(x ** 2 + y ** 2) - self._a1[0]
         z = z - self._m1[2] - self._a1[2]
-
-        q2 = np.arctan2(z, l) + np.arccos((l ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * l * self._a2[0]))
-        q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - l ** 2) / (2 * self._a2[0] * self._a3[0])) - np.pi
+        P = np.sqrt(l ** 2 + z ** 2)
+        q2 = np.arctan2(z, l) + np.arccos((P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * P * self._a2[0]))
+        q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - P ** 2) / (2 * self._a2[0] * self._a3[0])) - np.pi
 
         return np.array([np.rad2deg(x) for x in [q1, q2, q3]])
