@@ -42,6 +42,5 @@ def test_3():
     a2 = np.array([1, 0, 0])
     a3 = np.array([1, 0, 0])
     leg = KinematicsSolver(m1, a1, a2, a3)
-    res = leg.inverse(np.array([0,0,-1]))
     assert_allclose(leg.inverse(np.array([0, 0, -1]))[1:], np.array([-90, -90]), rtol=RTOL, atol=ATOL)
 
