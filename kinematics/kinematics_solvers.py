@@ -127,12 +127,17 @@ class KinematicsSolver:
         x = p[0]
         y = p[1]
         z = p[2]
-
-        q1 = np.arctan2(y, x)
-        l = np.sqrt(x ** 2 + y ** 2) - self._a1[0]
+        
+        q1 = np.arctan(y/x) if x and y else 0
+        
+        l = (np.sign(x) if x else 1)* np.sqrt(x ** 2 + y ** 2) - self._a1[0]
         z = z - self._m1[2] - self._a1[2]
+        
         P = np.sqrt(l ** 2 + z ** 2)
-        q2 = np.arctan2(z, l) + np.arccos((P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * P * self._a2[0]))
+        
+        q2 = -np.pi if z == 0 and l<0 else  np.arctan2(z,l) 
+        q2 += np.arccos((P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * P * self._a2[0]))
+        
         q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - P ** 2) / (2 * self._a2[0] * self._a3[0])) - np.pi
-
+                
         return np.array([np.rad2deg(x) for x in [q1, q2, q3]])
