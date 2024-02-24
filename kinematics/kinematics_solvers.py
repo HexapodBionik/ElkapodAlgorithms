@@ -128,7 +128,7 @@ class KinematicsSolver:
         y = p[1]
         z = p[2]
         
-        q1 = np.arctan(y/x) if x and y else 0
+        q1 = np.arctan(y/x)
         
         l = (np.sign(x) if x else 1)* np.sqrt(x ** 2 + y ** 2) - self._a1[0]
         z = z - self._m1[2] - self._a1[2]
