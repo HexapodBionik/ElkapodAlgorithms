@@ -1,5 +1,5 @@
 import numpy as np
-from kinematics.kinematics_utils import homogeneous_transform_matrix, rot_z, rot_x
+from kinematics.kinematics_utils import homogeneous_transform_matrix, rot_z, rot_x, adjust_float_point_error
 from kinematics.kinematics_exceptions import (InvalidInitVectorElements, InvalidInitVectorShape, InvalidInitVectorLength,
                                               InvalidInitVector)
 
@@ -136,8 +136,8 @@ class KinematicsSolver:
         P = np.sqrt(l ** 2 + z ** 2)
         
         q2 = -np.pi if z == 0 and l<0 else  np.arctan2(z,l) 
-        q2 += np.arccos((P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * P * self._a2[0]))
-        
-        q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - P ** 2) / (2 * self._a2[0] * self._a3[0])) - np.pi
-                
+        argQ2 = (P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * P * self._a2[0])
+        q2 += np.arccos(adjust_float_point_error(argQ2))
+        argQ3 = (self._a2[0] ** 2 + self._a3[0] ** 2 - P ** 2) / (2 * self._a2[0] * self._a3[0])
+        q3 = np.arccos(adjust_float_point_error(argQ3)) - np.pi
         return np.array([np.rad2deg(x) for x in [q1, q2, q3]])

@@ -92,3 +92,9 @@ def trans(v):
                      [0, 1, 0, v[1]],
                      [0, 0, 1, v[2]],
                      [0, 0, 0, v[3]]])
+
+def adjust_float_point_error(arg:float):
+    sign = np.sign(arg)
+    if np.isclose(1,abs(arg),1e-9):
+        return sign*(abs(arg)-0.00000000000001)
+    return arg

@@ -85,8 +85,7 @@ def test_8():
     a3 = np.array([np.sqrt(5), 0, 0])
 
     leg = KinematicsSolver(m1, a1, a2, a3)
-    (assert_allclose(leg.inverse(np.array([0, 1, -1])), np.array([-90, -90, -180+np.rad2deg(np.arctan(2))]), rtol=RTOL, atol=ATOL) or
-    assert_allclose(leg.inverse(np.array([0, 1, -1])), np.array([90, 0, -180+np.rad2deg(np.arctan(0.5))]), rtol=RTOL, atol=ATOL))
+    assert_allclose(leg.inverse(np.array([0, 1, -1])), np.array([90, 0, -180+np.rad2deg(np.arctan(0.5))]), rtol=RTOL, atol=ATOL)
 
 def test_9():
     m1 = np.array([0,0,0.5])
