@@ -1,6 +1,9 @@
 import numpy as np
-from kinematics.kinematics_utils import homogeneous_transform_matrix, rot_z, rot_x
-from kinematics.kinematics_exceptions import (InvalidInitVectorElements, InvalidInitVectorShape, InvalidInitVectorLength,
+from kinematics.kinematics_utils import (homogeneous_transform_matrix,
+                                         rot_z, rot_x)
+from kinematics.kinematics_exceptions import (InvalidInitVectorElements,
+                                              InvalidInitVectorShape,
+                                              InvalidInitVectorLength,
                                               InvalidInitVector)
 
 
@@ -11,7 +14,8 @@ class KinematicsSolver:
     The leg has 3 degrees of freedom.
     """
 
-    def __init__(self, m1: np.ndarray, a1: np.ndarray, a2: np.ndarray, a3: np.ndarray):
+    def __init__(self, m1: np.ndarray, a1: np.ndarray,
+                 a2: np.ndarray, a3: np.ndarray):
         """
         @param m1: Translation from world origin to J1
         @param a1: Link 1 (between J1 and J2)
@@ -27,24 +31,28 @@ class KinematicsSolver:
     @staticmethod
     def _check_vector_dimensions(vector: np.ndarray) -> None:
         if not isinstance(vector, np.ndarray):
-            raise InvalidInitVector("Improper init vector type! Should be equal to np.ndarray!")
+            raise InvalidInitVector("Improper init vector type! "
+                                    "Should be equal to np.ndarray!")
         if vector.ndim != 1:
-            raise InvalidInitVectorShape("Improper vector shape! Ndim should be equal to 1!")
+            raise InvalidInitVectorShape("Improper vector shape! "
+                                         "ndim should be equal to 1!")
         if len(vector) != 3:
-            raise InvalidInitVectorLength("Improper vector length! Vector length should equal to 3!")
+            raise InvalidInitVectorLength("Improper vector length! "
+                                          "Vector length should be 3!")
 
     @staticmethod
     def _check_vector_numbers(vector: np.ndarray, scalar_index: int) -> None:
         vector_indexes = [x for x in range(len(vector)) if x != scalar_index]
         for index in vector_indexes:
             if vector[index] != 0:
-                raise InvalidInitVectorElements(f"Invalid scalar's value! Scalar at index {index} should be equal to 0!")
+                raise InvalidInitVectorElements("Invalid scalar's value! "
+                                                f"Scalar at index {index} "
+                                                "should be equal to 0!")
 
-        
     @property
     def a1(self) -> np.ndarray:
         return self._a1
-    
+
     @a1.setter
     def a1(self, new_a1: np.ndarray) -> None:
         self._check_vector_dimensions(new_a1)
@@ -93,7 +101,7 @@ class KinematicsSolver:
         @return: Position of leg's foot center point as [x,y,z]
         """
         q_rad = [np.deg2rad(x) for x in q]
-        
+
         rot_0_1 = rot_z(q_rad[0])
         rot_1_2 = rot_x(np.pi/2) @ rot_z(q_rad[1])
         rot_2_3 = rot_z(q_rad[2])
@@ -129,10 +137,13 @@ class KinematicsSolver:
         z = p[2]
 
         q1 = np.arctan2(y, x)
-        l = np.sqrt(x ** 2 + y ** 2) - self._a1[0]
+        span = np.sqrt(x ** 2 + y ** 2) - self._a1[0]
         z = z - self._m1[2] - self._a1[2]
 
-        q2 = np.arctan2(z, l) + np.arccos((l ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / (2 * l * self._a2[0]))
-        q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - l ** 2) / (2 * self._a2[0] * self._a3[0])) - np.pi
+        q2 = np.arctan2(z, span) + \
+            np.arccos((span ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) /
+                      (2 * span * self._a2[0]))
+        q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - span ** 2) /
+                       (2 * self._a2[0] * self._a3[0])) - np.pi
 
         return np.array([np.rad2deg(x) for x in [q1, q2, q3]])

@@ -29,7 +29,7 @@ def test_kinematics_invalid_m1_type():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_invalid_a1_type():
@@ -39,7 +39,7 @@ def test_kinematics_invalid_a1_type():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_invalid_a2_type():
@@ -49,7 +49,7 @@ def test_kinematics_invalid_a2_type():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_invalid_a3_type():
@@ -59,7 +59,7 @@ def test_kinematics_invalid_a3_type():
     a3 = 0
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_m1_too_few_number_of_dimensions():
@@ -69,7 +69,7 @@ def test_kinematics_m1_too_few_number_of_dimensions():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_m1_too_many_number_of_dimensions():
@@ -79,7 +79,7 @@ def test_kinematics_m1_too_many_number_of_dimensions():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_m1_improper_elements_values_1():
@@ -89,7 +89,7 @@ def test_kinematics_m1_improper_elements_values_1():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_m1_improper_elements_values_2():
@@ -99,7 +99,7 @@ def test_kinematics_m1_improper_elements_values_2():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a1_too_few_number_of_dimensions():
@@ -109,7 +109,7 @@ def test_kinematics_a1_too_few_number_of_dimensions():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a1_too_many_number_of_dimensions():
@@ -119,7 +119,7 @@ def test_kinematics_a1_too_many_number_of_dimensions():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a1_improper_elements_values_1():
@@ -129,7 +129,7 @@ def test_kinematics_a1_improper_elements_values_1():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a1_improper_elements_values_2():
@@ -139,7 +139,7 @@ def test_kinematics_a1_improper_elements_values_2():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a2_too_few_number_of_dimensions():
@@ -149,7 +149,7 @@ def test_kinematics_a2_too_few_number_of_dimensions():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a2_too_many_number_of_dimensions():
@@ -159,7 +159,7 @@ def test_kinematics_a2_too_many_number_of_dimensions():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a2_improper_elements_values_1():
@@ -169,7 +169,7 @@ def test_kinematics_a2_improper_elements_values_1():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a2_improper_elements_values_2():
@@ -179,7 +179,7 @@ def test_kinematics_a2_improper_elements_values_2():
     a3 = np.array([0.1, 0, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a3_too_few_number_of_dimensions():
@@ -189,7 +189,7 @@ def test_kinematics_a3_too_few_number_of_dimensions():
     a3 = np.array(1)
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a3_too_many_number_of_dimensions():
@@ -199,7 +199,7 @@ def test_kinematics_a3_too_many_number_of_dimensions():
     a3 = np.array([0.1, 0, 0, 1])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a3_improper_elements_values_1():
@@ -209,7 +209,7 @@ def test_kinematics_a3_improper_elements_values_1():
     a3 = np.array([0.1, 0.1, 0])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_a3_improper_elements_values_2():
@@ -219,7 +219,7 @@ def test_kinematics_a3_improper_elements_values_2():
     a3 = np.array([0.1, 0, 0.1])
 
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_improper_m1_translation():
@@ -228,7 +228,7 @@ def test_kinematics_improper_m1_translation():
     a2 = np.array([1, 0, 0])
     a3 = np.array([1, 0, 0])
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_improper_a1_translation():
@@ -237,7 +237,7 @@ def test_kinematics_improper_a1_translation():
     a2 = np.array([1, 0, 0])
     a3 = np.array([1, 0, 0])
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_improper_a2_translation():
@@ -246,7 +246,7 @@ def test_kinematics_improper_a2_translation():
     a2 = np.array([0, 0, 1])
     a3 = np.array([1, 0, 0])
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
+        KinematicsSolver(m1, a1, a2, a3)
 
 
 def test_kinematics_improper_a3_translation():
@@ -255,5 +255,4 @@ def test_kinematics_improper_a3_translation():
     a2 = np.array([1, 0, 0])
     a3 = np.array([0, 0, 1])
     with raises(InvalidInitVector):
-        kinematics_solver = KinematicsSolver(m1, a1, a2, a3)
-
+        KinematicsSolver(m1, a1, a2, a3)
