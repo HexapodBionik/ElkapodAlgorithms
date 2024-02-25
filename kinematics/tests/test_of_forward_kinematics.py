@@ -74,7 +74,7 @@ def test_5():
                     rtol=RTOL, atol=ATOL)
 
 
-def test_5():
+def test_6():
     m1 = np.array([0, 0, -5.41])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -89,7 +89,7 @@ def test_5():
                     rtol=RTOL, atol=ATOL)
 
 
-def test_6():
+def test_7():
     m1 = np.array([0, 0, -1])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -104,7 +104,7 @@ def test_6():
                     rtol=RTOL, atol=ATOL)
 
 
-def test_7():
+def test_8():
     m1 = np.array([0, 0, 0.92])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -126,7 +126,7 @@ def test_7():
                     np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
 
 
-def test_8():
+def test_9():
     m1 = np.array([0, 0, 0.32])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -148,7 +148,7 @@ def test_8():
                     np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
 
 
-def test_9():
+def test_10():
     m1 = np.array([0, 0, 0])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -161,7 +161,7 @@ def test_9():
                     m1, rtol=RTOL, atol=ATOL)
 
 
-def test_10():
+def test_11():
     m1 = np.array([0, 0, 4.24])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -174,7 +174,7 @@ def test_10():
                     m1, rtol=RTOL, atol=ATOL)
 
 
-def test_11():
+def test_12():
     m1 = np.array([0, 0, 0])
     a1 = np.array([2.5, 0, 0])
     a2 = np.array([3, 0, 0])
