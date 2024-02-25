@@ -43,19 +43,20 @@ def rot_z(alpha: float) -> np.ndarray:
                      ])
 
 
-def homogeneous_transform_matrix(rotation: np.ndarray, translation: np.ndarray) -> np.ndarray:
+def homogeneous_transform_matrix(rotation: np.ndarray,
+                                 translation: np.ndarray) -> np.ndarray:
     """
     Returns homogeneous transform matrix for 3D operations,
     robotics version (perspective set to vector of zeros, scale set to 1)
 
-    @param rotation: 3x3 matrix, positively determined (right-handed coordinates)
+    @param rotation: 3x3 matrix, positively determined
     @param translation: 1x3 matrix, [dx, dy, dz]
     """
 
     htm = np.array([[*rotation[0], translation[0]],
-                     [*rotation[1], translation[1]],
-                     [*rotation[2], translation[2]],
-                     [0, 0, 0, 1]])
+                    [*rotation[1], translation[1]],
+                    [*rotation[2], translation[2]],
+                    [0, 0, 0, 1]])
     return htm
 
 
@@ -93,8 +94,9 @@ def trans(v):
                      [0, 0, 1, v[2]],
                      [0, 0, 0, v[3]]])
 
-def adjust_float_point_error(arg:float):
+
+def adjust_float_point_error(arg: float):
     sign = np.sign(arg)
-    if np.isclose(1,abs(arg),1e-9):
+    if np.isclose(1, abs(arg), 1e-9):
         return sign*(abs(arg)-0.00000000000001)
     return arg

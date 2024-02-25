@@ -6,7 +6,6 @@ J2: (-90, 90)
 J3: (-180, 0)
 """
 
-import pytest
 import numpy as np
 from numpy.testing import assert_allclose
 from kinematics.kinematics_solvers import KinematicsSolver
@@ -22,7 +21,8 @@ def test_1():
     a3 = np.array([1, 0, 0])
 
     leg = KinematicsSolver(m1, a1, a2, a3)
-    assert_allclose(leg.forward(np.array([0, 0, 0])), np.array([3, 0, 0]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([0, 0, 0])),
+                    np.array([3, 0, 0]), rtol=RTOL, atol=ATOL)
 
 
 def test_2():
@@ -32,7 +32,8 @@ def test_2():
     a3 = np.array([1, 0, 0])
 
     leg = KinematicsSolver(m1, a1, a2, a3)
-    assert_allclose(leg.forward(np.array([0, -90, -90])), np.array([0, 0, -1]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([0, -90, -90])),
+                    np.array([0, 0, -1]), rtol=RTOL, atol=ATOL)
 
     m1 = np.array([0, 0, 0.17])
     a1 = np.array([1, 0, 0])
@@ -41,7 +42,10 @@ def test_2():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
     angle_1 = 12.24
-    assert_allclose(leg.forward(np.array([angle_1, 0, 0])), np.array([3*np.cos(np.deg2rad(angle_1)), 3*np.sin(np.deg2rad(angle_1)), 0.17]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, 0, 0])),
+                    np.array([3*np.cos(np.deg2rad(angle_1)),
+                              3*np.sin(np.deg2rad(angle_1)), 0.17]),
+                    rtol=RTOL, atol=ATOL)
 
 
 def test_4():
@@ -52,7 +56,10 @@ def test_4():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
     angle_1 = -84.52
-    assert_allclose(leg.forward(np.array([angle_1, 0, 0])), np.array([3*np.cos(np.deg2rad(angle_1)), 3*np.sin(np.deg2rad(angle_1)), 0.1]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, 0, 0])),
+                    np.array([3*np.cos(np.deg2rad(angle_1)),
+                              3*np.sin(np.deg2rad(angle_1)), 0.1]),
+                    rtol=RTOL, atol=ATOL)
 
 
 def test_5():
@@ -62,7 +69,9 @@ def test_5():
     a3 = np.array([1, 0, 0])
 
     leg = KinematicsSolver(m1, a1, a2, a3)
-    assert_allclose(leg.forward(np.array([0, 60, -30])), np.array([1+np.sqrt(3)/2, 0, 1.5-1.33]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([0, 60, -30])),
+                    np.array([1+np.sqrt(3)/2, 0, 1.5-1.33]),
+                    rtol=RTOL, atol=ATOL)
 
 
 def test_5():
@@ -74,7 +83,10 @@ def test_5():
     leg = KinematicsSolver(m1, a1, a2, a3)
     angle_1 = 34.12
     angle_2 = -23.11
-    assert_allclose(leg.forward(np.array([angle_1, angle_2, -180])), np.array([np.cos(np.deg2rad(angle_1)), np.sin(np.deg2rad(angle_1)), -5.41]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, angle_2, -180])),
+                    np.array([np.cos(np.deg2rad(angle_1)),
+                              np.sin(np.deg2rad(angle_1)), -5.41]),
+                    rtol=RTOL, atol=ATOL)
 
 
 def test_6():
@@ -86,7 +98,10 @@ def test_6():
     leg = KinematicsSolver(m1, a1, a2, a3)
     angle_1 = -77.81
     angle_2 = 42.11
-    assert_allclose(leg.forward(np.array([angle_1, angle_2, -180])), np.array([np.cos(np.deg2rad(angle_1)), np.sin(np.deg2rad(angle_1)), -1]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, angle_2, -180])),
+                    np.array([np.cos(np.deg2rad(angle_1)),
+                              np.sin(np.deg2rad(angle_1)), -1]),
+                    rtol=RTOL, atol=ATOL)
 
 
 def test_7():
@@ -100,12 +115,15 @@ def test_7():
     angle_2 = -32.14
     angle_3 = -81.23
 
-    R = 1 + np.sin(np.deg2rad(90+angle_2)) - np.cos(np.deg2rad(180+angle_2+angle_3))
-    X =  np.cos(np.deg2rad(angle_1))*R
+    R = 1 + np.sin(np.deg2rad(90+angle_2)) - \
+        np.cos(np.deg2rad(180+angle_2+angle_3))
+    X = np.cos(np.deg2rad(angle_1))*R
     Y = np.sin(np.deg2rad(angle_1))*R
-    Z = 0.92 - np.cos(np.deg2rad(90+angle_2)) - np.sin(np.deg2rad(180+angle_2+angle_3))
+    Z = 0.92 - np.cos(np.deg2rad(90+angle_2)) - \
+        np.sin(np.deg2rad(180+angle_2+angle_3))
 
-    assert_allclose(leg.forward(np.array([angle_1, angle_2, angle_3])), np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, angle_2, angle_3])),
+                    np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
 
 
 def test_8():
@@ -118,13 +136,16 @@ def test_8():
     angle_1 = 30.29
     angle_2 = 52.43
     angle_3 = -164.13
-    
-    R = 1 + np.cos(np.deg2rad(angle_2)) - np.sin(np.deg2rad(90-angle_2-(180+angle_3)))
+
+    R = 1 + np.cos(np.deg2rad(angle_2)) - \
+        np.sin(np.deg2rad(90-angle_2-(180+angle_3)))
     X = np.cos(np.deg2rad(angle_1))*R
     Y = np.sin(np.deg2rad(angle_1))*R
-    Z = 0.32 + np.sin(np.deg2rad(angle_2)) - np.cos(np.deg2rad(90-angle_2-(180+angle_3)))
-    
-    assert_allclose(leg.forward(np.array([angle_1, angle_2, angle_3])), np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
+    Z = 0.32 + np.sin(np.deg2rad(angle_2)) - \
+        np.cos(np.deg2rad(90-angle_2-(180+angle_3)))
+
+    assert_allclose(leg.forward(np.array([angle_1, angle_2, angle_3])),
+                    np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
 
 
 def test_9():
@@ -136,7 +157,8 @@ def test_9():
     leg = KinematicsSolver(m1, a1, a2, a3)
 
     angle_1 = 68.21
-    assert_allclose(leg.forward(np.array([angle_1, -90, -135])), m1, rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, -90, -135])),
+                    m1, rtol=RTOL, atol=ATOL)
 
 
 def test_10():
@@ -148,7 +170,8 @@ def test_10():
     leg = KinematicsSolver(m1, a1, a2, a3)
 
     angle_1 = -76.11
-    assert_allclose(leg.forward(np.array([angle_1, -90, -135])), m1, rtol=RTOL, atol=ATOL)
+    assert_allclose(leg.forward(np.array([angle_1, -90, -135])),
+                    m1, rtol=RTOL, atol=ATOL)
 
 
 def test_11():
@@ -159,6 +182,5 @@ def test_11():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
 
-    assert_allclose(leg.forward(np.array([0, 0, 0])), np.array([9.1, 0, 0]), rtol=RTOL, atol=ATOL)
-
-
+    assert_allclose(leg.forward(np.array([0, 0, 0])),
+                    np.array([9.1, 0, 0]), rtol=RTOL, atol=ATOL)
