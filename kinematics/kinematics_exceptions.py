@@ -17,6 +17,7 @@ class InvalidInitVectorElements(InvalidInitVector):
     def __init__(self, message: str):
         super().__init__(message)
 
+        
 class PointOutOfReach(Exception):
     def __init__(self,message: str) -> None:
         super().__init__(message)

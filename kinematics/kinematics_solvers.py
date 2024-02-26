@@ -12,7 +12,6 @@ from MotionPlanning.kinematics.kinematics_exceptions import (
         PointOutOfReach
 )
 
-
 class KinematicsSolver:
     """
     Class storing parameters of the
@@ -44,7 +43,8 @@ class KinematicsSolver:
                                          "ndim should be equal to 1!")
         if len(vector) != 3:
             raise InvalidInitVectorLength("Improper vector length! "
-                                          "Vector length be 3!")
+
+                                          "Vector length should be 3!")
 
     @staticmethod
     def _check_vector_numbers(vector: np.ndarray, scalar_index: int) -> None:
@@ -149,6 +149,7 @@ class KinematicsSolver:
         z = z - self._m1[2] - self._a1[2]
 
         P = np.sqrt(span ** 2 + z ** 2)
+
 
         if np.isclose(0,P,1e-9):
             if self.a2[0]!=self.a3[0]:
