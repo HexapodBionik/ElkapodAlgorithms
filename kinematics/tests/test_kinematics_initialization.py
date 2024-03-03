@@ -1,11 +1,9 @@
 from pytest import raises
-from kinematics.kinematics_solvers import KinematicsSolver
-from kinematics.kinematics_exceptions import InvalidInitVector
+from MotionPlanning.kinematics.kinematics_solvers import KinematicsSolver
+from MotionPlanning.kinematics.kinematics_exceptions import InvalidInitVector
 import numpy as np
 from numpy.testing import assert_allclose
-
-ATOL = 1e-8
-RTOL = 1e-8
+from MotionPlanning.kinematics.tests import ATOL, RTOL
 
 
 def test_kinematics_proper_initialization():

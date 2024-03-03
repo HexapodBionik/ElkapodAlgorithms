@@ -1,10 +1,16 @@
 import numpy as np
-from kinematics.kinematics_utils import (homogeneous_transform_matrix,
-                                         rot_z, rot_x)
-from kinematics.kinematics_exceptions import (InvalidInitVectorElements,
-                                              InvalidInitVectorShape,
-                                              InvalidInitVectorLength,
-                                              InvalidInitVector)
+from MotionPlanning.kinematics.kinematics_utils import (
+        homogeneous_transform_matrix,
+        rot_z, rot_x,
+        adjust_float_point_error
+)
+from MotionPlanning.kinematics.kinematics_exceptions import (
+        InvalidInitVectorElements,
+        InvalidInitVectorShape,
+        InvalidInitVectorLength,
+        InvalidInitVector,
+        PointOutOfReach
+)
 
 
 class KinematicsSolver:
@@ -38,6 +44,7 @@ class KinematicsSolver:
                                          "ndim should be equal to 1!")
         if len(vector) != 3:
             raise InvalidInitVectorLength("Improper vector length! "
+
                                           "Vector length should be 3!")
 
     @staticmethod
@@ -136,14 +143,29 @@ class KinematicsSolver:
         y = p[1]
         z = p[2]
 
-        q1 = np.arctan2(y, x)
-        span = np.sqrt(x ** 2 + y ** 2) - self._a1[0]
+        q1 = np.arctan(y/x) if x else np.sign(y)*np.pi/2
+
+        span = (np.sign(x) if x else 1) * \
+            np.sqrt(x ** 2 + y ** 2) - self._a1[0]
         z = z - self._m1[2] - self._a1[2]
 
-        q2 = np.arctan2(z, span) + \
-            np.arccos((span ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) /
-                      (2 * span * self._a2[0]))
-        q3 = np.arccos((self._a2[0] ** 2 + self._a3[0] ** 2 - span ** 2) /
-                       (2 * self._a2[0] * self._a3[0])) - np.pi
+        P = np.sqrt(span ** 2 + z ** 2)
+
+        if np.isclose(0, P, 1e-9):
+            if self.a2[0] != self.a3[0]:
+                raise PointOutOfReach(f"Given point {x,y,z} cannot be reached")
+            else:
+                q2 = 0
+        else:
+            argQ2 = (P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / \
+                (2 * P * self._a2[0])
+
+            q2 = -np.pi if z == 0 and span < 0 else np.arctan2(z, span)
+            q2 += np.arccos(adjust_float_point_error(argQ2))
+
+        argQ3 = (self._a2[0] ** 2 + self._a3[0] ** 2 - P ** 2) / \
+                (2 * self._a2[0] * self._a3[0])
+
+        q3 = np.arccos(adjust_float_point_error(argQ3)) - np.pi
 
         return np.array([np.rad2deg(x) for x in [q1, q2, q3]])

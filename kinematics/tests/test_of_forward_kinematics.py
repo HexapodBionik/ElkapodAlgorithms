@@ -8,10 +8,8 @@ J3: (-180, 0)
 
 import numpy as np
 from numpy.testing import assert_allclose
-from kinematics.kinematics_solvers import KinematicsSolver
-
-ATOL = 1e-8
-RTOL = 1e-8
+from MotionPlanning.kinematics.kinematics_solvers import KinematicsSolver
+from MotionPlanning.kinematics.tests import ATOL, RTOL
 
 
 def test_1():
@@ -70,11 +68,12 @@ def test_5():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.forward(np.array([0, 60, -30])),
-                    np.array([1+np.sqrt(3)/2, 0, 1.5-1.33]),
+                    np.array([1+np.cos(np.pi/3) + np.cos(np.pi/6), 0,
+                              np.sin(np.pi/3)+np.sin(np.pi/6)-1.33]),
                     rtol=RTOL, atol=ATOL)
 
 
-def test_5():
+def test_6():
     m1 = np.array([0, 0, -5.41])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -89,7 +88,7 @@ def test_5():
                     rtol=RTOL, atol=ATOL)
 
 
-def test_6():
+def test_7():
     m1 = np.array([0, 0, -1])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -104,7 +103,7 @@ def test_6():
                     rtol=RTOL, atol=ATOL)
 
 
-def test_7():
+def test_8():
     m1 = np.array([0, 0, 0.92])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -126,7 +125,7 @@ def test_7():
                     np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
 
 
-def test_8():
+def test_9():
     m1 = np.array([0, 0, 0.32])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -148,7 +147,7 @@ def test_8():
                     np.array([X, Y, Z]), rtol=RTOL, atol=ATOL)
 
 
-def test_9():
+def test_10():
     m1 = np.array([0, 0, 0])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -161,7 +160,7 @@ def test_9():
                     m1, rtol=RTOL, atol=ATOL)
 
 
-def test_10():
+def test_11():
     m1 = np.array([0, 0, 4.24])
     a1 = np.array([1, 0, 0])
     a2 = np.array([1, 0, 0])
@@ -174,7 +173,7 @@ def test_10():
                     m1, rtol=RTOL, atol=ATOL)
 
 
-def test_11():
+def test_12():
     m1 = np.array([0, 0, 0])
     a1 = np.array([2.5, 0, 0])
     a2 = np.array([3, 0, 0])
