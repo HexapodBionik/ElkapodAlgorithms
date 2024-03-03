@@ -70,7 +70,8 @@ def test_5():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.forward(np.array([0, 60, -30])),
-                    np.array([1+np.cos(np.pi/3)+ np.cos(np.pi/6), 0, np.sin(np.pi/3)+np.sin(np.pi/6)-1.33]),
+                    np.array([1+np.cos(np.pi/3) + np.cos(np.pi/6), 0,
+                              np.sin(np.pi/3)+np.sin(np.pi/6)-1.33]),
                     rtol=RTOL, atol=ATOL)
 
 

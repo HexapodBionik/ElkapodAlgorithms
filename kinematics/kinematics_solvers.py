@@ -12,6 +12,7 @@ from MotionPlanning.kinematics.kinematics_exceptions import (
         PointOutOfReach
 )
 
+
 class KinematicsSolver:
     """
     Class storing parameters of the
@@ -150,22 +151,21 @@ class KinematicsSolver:
 
         P = np.sqrt(span ** 2 + z ** 2)
 
-
-        if np.isclose(0,P,1e-9):
-            if self.a2[0]!=self.a3[0]:
-                raise  PointOutOfReach(f"Given point {x,y,z} cannot be reached")
+        if np.isclose(0, P, 1e-9):
+            if self.a2[0] != self.a3[0]:
+                raise PointOutOfReach(f"Given point {x,y,z} cannot be reached")
             else:
-                q2=0                 
-        else:    
+                q2 = 0
+        else:
             argQ2 = (P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / \
                 (2 * P * self._a2[0])
-        
+
             q2 = -np.pi if z == 0 and span < 0 else np.arctan2(z, span)
             q2 += np.arccos(adjust_float_point_error(argQ2))
-        
+
         argQ3 = (self._a2[0] ** 2 + self._a3[0] ** 2 - P ** 2) / \
                 (2 * self._a2[0] * self._a3[0])
-        
+
         q3 = np.arccos(adjust_float_point_error(argQ3)) - np.pi
-        
+
         return np.array([np.rad2deg(x) for x in [q1, q2, q3]])
