@@ -9,9 +9,7 @@ J3: (-180, 0)
 import numpy as np
 from numpy.testing import assert_allclose
 from MotionPlanning.kinematics.kinematics_solvers import KinematicsSolver
-
-ATOL = 1e-8
-RTOL = 1e-8
+from MotionPlanning.kinematics.tests import ATOL, RTOL
 
 
 def test_1():

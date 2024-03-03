@@ -9,9 +9,7 @@ J3: (-180, 0)
 import numpy as np
 from numpy.testing import assert_allclose
 from MotionPlanning.kinematics.kinematics_solvers import KinematicsSolver
-
-ATOL = 1e-5
-RTOL = 1e-5
+from MotionPlanning.kinematics.tests import ATOL, RTOL
 
 
 def test_1():
@@ -202,14 +200,3 @@ def test_17():
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.inverse(np.array([1, 0, -2.2])),
                     np.array([0, -90, 0]), rtol=RTOL, atol=ATOL)
-
-
-#TODO spoko test do rzucania errora
-# def test_by_piotrek():
-#     m1 = np.array([0,0,0.05])
-#     a1 = np.array([0.063, 0, 0])
-#     a2 = np.array([0.09, 0, 0])
-#     a3 = np.array([0.23, 0, 0])
-
-#     leg = KinematicsSolver(m1, a1, a2, a3)
-#     res = leg.inverse(np.array([0.15,0.01,0.01]))
