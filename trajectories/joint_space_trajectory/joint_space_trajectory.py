@@ -1,5 +1,5 @@
-from kinematics.kinematics import KinematicsSolver
-from joint_trajectories import SimpleJointSpaceTrajectory
+from ...kinematics.kinematics_solvers import KinematicsSolver
+from .joint_trajectories import SimpleJointSpaceTrajectory
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib

@@ -1,5 +1,5 @@
-from kinematics.kinematics import KinematicsSolver
-from joint_trajectories import ViaPointsJointSpaceTrajectory
+from ...kinematics.kinematics_solvers import KinematicsSolver
+from .joint_trajectories import ViaPointsJointSpaceTrajectory
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
