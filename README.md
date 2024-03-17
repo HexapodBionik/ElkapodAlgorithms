@@ -25,7 +25,7 @@ pip install numpy
 To make use of the kinematics module, you can import it in your existing project or run it standalone for custom computations.
 
 ```python
-from kinematics.kinematics import RoboticArm
+from kinematics.kinematics_solvers import KinematicsSolver
 ```
 
 ### Main Features
