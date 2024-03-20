@@ -1,8 +1,8 @@
 from pytest import raises
 import numpy as np
 from numpy.testing import assert_allclose
-from kinematics.kinematics_solvers import KinematicsSolver
-from kinematics.kinematics_exceptions import InvalidInitVector
+from ..kinematics_solvers import KinematicsSolver
+from ..kinematics_exceptions import InvalidInitVector
 from . import ATOL, RTOL
 
 
