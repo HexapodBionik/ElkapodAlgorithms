@@ -1,5 +1,5 @@
-from kinematics.kinematics import KinematicsSolver
-from utils import SplinePolynomial
+from ...kinematics.kinematics_solvers import KinematicsSolver
+from .utils import SplinePolynomial
 import numpy as np
 import math
 from typing import Tuple

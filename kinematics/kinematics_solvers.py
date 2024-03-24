@@ -1,10 +1,10 @@
 import numpy as np
-from MotionPlanning.kinematics.kinematics_utils import (
+from .kinematics_utils import (
         homogeneous_transform_matrix,
         rot_z, rot_x,
         adjust_float_point_error
 )
-from MotionPlanning.kinematics.kinematics_exceptions import (
+from .kinematics_exceptions import (
         InvalidInitVectorElements,
         InvalidInitVectorShape,
         InvalidInitVectorLength,
