@@ -254,3 +254,57 @@ def test_kinematics_improper_a3_translation():
     a3 = np.array([0, 0, 1])
     with raises(InvalidInitVector):
         KinematicsSolver(m1, a1, a2, a3)
+
+def test_kinematics_zero_mount_angle():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angles = np.array([0,0,0])
+    
+    kinematics_solver = KinematicsSolver(m1, a1, a2, a3,mount_angles)
+
+    assert_allclose(m1, kinematics_solver.m1, rtol=RTOL, atol=ATOL)
+    assert_allclose(a1, kinematics_solver.a1, rtol=RTOL, atol=ATOL)
+    assert_allclose(a2, kinematics_solver.a2, rtol=RTOL, atol=ATOL)
+    assert_allclose(a3, kinematics_solver.a3, rtol=RTOL, atol=ATOL)
+    assert_allclose(mount_angles,kinematics_solver.mount_angles,rtol=RTOL,atol=ATOL)
+
+def test_kinematics_improper_mount_angles1():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angles = np.array([0,0])
+    with raises(InvalidInitVector):    
+        KinematicsSolver(m1, a1, a2, a3,mount_angles)
+
+
+def test_kinematics_improper_mount_angles2():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angles = np.array([0,0,-30])
+    with raises(InvalidInitVector):    
+        KinematicsSolver(m1, a1, a2, a3,mount_angles)
+
+
+def test_kinematics_improper_mount_angles3():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angles = np.array([100, 40,0,0])
+    with raises(InvalidInitVector):    
+        KinematicsSolver(m1, a1, a2, a3,mount_angles)
+
+
+def test_kinematics_improper_mount_angles4():
+    m1 = np.array([0, 0, 1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angles = 10
+    with raises(InvalidInitVector):    
+        KinematicsSolver(m1, a1, a2, a3,mount_angles)

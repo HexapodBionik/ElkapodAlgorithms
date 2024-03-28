@@ -32,8 +32,8 @@ def test_2():
     angle1 = 24.35
 
     leg = KinematicsSolver(m1, a1, a2, a3)
-    assert_allclose(leg.inverse(np.array([3*np.cos(np.deg2rad(angle1)),
-                                          3*np.sin(np.deg2rad(angle1)), 0])),
+    assert_allclose(leg.inverse(np.array([3 * np.cos(np.deg2rad(angle1)),
+                                          3 * np.sin(np.deg2rad(angle1)), 0])),
                     np.array([angle1, 0, 0]), rtol=RTOL, atol=ATOL)
 
 
@@ -61,7 +61,7 @@ def test_5():
     m1 = np.array([0, 0, 0])
     a1 = np.array([1, 0, 0])
     a2 = np.array([2, 0, 0])
-    a3 = np.array([2*np.sqrt(2), 0, 0])
+    a3 = np.array([2 * np.sqrt(2), 0, 0])
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.inverse(np.array([-1, 0, 0])),
                     np.array([0, -90, -135]), rtol=RTOL, atol=ATOL)
@@ -85,7 +85,7 @@ def test_7():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.inverse(np.array([-1, 0, -1])),
-                    np.array([0, -90, -180+np.rad2deg(np.arctan(2))]),
+                    np.array([0, -90, -180 + np.rad2deg(np.arctan(2))]),
                     rtol=RTOL, atol=ATOL)
 
 
@@ -97,7 +97,7 @@ def test_8():
 
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.inverse(np.array([0, 1, -1])),
-                    np.array([90, 0, -180+np.rad2deg(np.arctan(0.5))]),
+                    np.array([90, 0, -180 + np.rad2deg(np.arctan(0.5))]),
                     rtol=RTOL, atol=ATOL)
 
 
@@ -108,9 +108,9 @@ def test_9():
     a3 = np.array([1, 0, 0])
     leg = KinematicsSolver(m1, a1, a2, a3)
 
-    assert_allclose(leg.inverse(np.array([((0.5+np.sqrt(2)/2)*(np.sqrt(3)/2)),
-                                          ((0.5+np.sqrt(2)/2)*0.5),
-                                          (0.5+np.sqrt(2)/2 - 1)])),
+    assert_allclose(leg.inverse(np.array([((0.5 + np.sqrt(2) / 2) * (np.sqrt(3) / 2)),
+                                          ((0.5 + np.sqrt(2) / 2) * 0.5),
+                                          (0.5 + np.sqrt(2) / 2 - 1)])),
                     np.array([30, 45, -135]), rtol=RTOL, atol=ATOL)
 
 
@@ -121,8 +121,8 @@ def test_10():
     a3 = np.array([1, 0, 0])
     leg = KinematicsSolver(m1, a1, a2, a3)
 
-    assert_allclose(leg.inverse(np.array([((0.5)*(np.sqrt(3)/2)),
-                                          ((0.5)*0.5), 0.5]))[[0, 2]],
+    assert_allclose(leg.inverse(np.array([((0.5) * (np.sqrt(3) / 2)),
+                                          ((0.5) * 0.5), 0.5]))[[0, 2]],
                     np.array([30, -180]), rtol=RTOL, atol=ATOL)
 
 
@@ -133,8 +133,8 @@ def test_11():
     a3 = np.array([2, 0, 0])
     leg = KinematicsSolver(m1, a1, a2, a3)
     angle_1 = -53.24
-    assert_allclose(leg.inverse(np.array([0.75*np.cos(np.deg2rad(angle_1)),
-                                          0.75*np.sin(np.deg2rad(angle_1)),
+    assert_allclose(leg.inverse(np.array([0.75 * np.cos(np.deg2rad(angle_1)),
+                                          0.75 * np.sin(np.deg2rad(angle_1)),
                                           0.1]))[[0, 2]],
                     np.array([angle_1, -180]), rtol=RTOL, atol=ATOL)
 
@@ -156,8 +156,8 @@ def test_13():
     a3 = np.array([2.3, 0, 0])
     leg = KinematicsSolver(m1, a1, a2, a3)
     angle_1 = 75.14
-    assert_allclose(leg.inverse(np.array([1.7*np.cos(np.deg2rad(angle_1)),
-                                          1.7*np.sin(np.deg2rad(angle_1)),
+    assert_allclose(leg.inverse(np.array([1.7 * np.cos(np.deg2rad(angle_1)),
+                                          1.7 * np.sin(np.deg2rad(angle_1)),
                                           3.7])),
                     np.array([angle_1, 90, 0]), rtol=RTOL, atol=ATOL)
 
@@ -200,3 +200,83 @@ def test_17():
     leg = KinematicsSolver(m1, a1, a2, a3)
     assert_allclose(leg.inverse(np.array([1, 0, -2.2])),
                     np.array([0, -90, 0]), rtol=RTOL, atol=ATOL)
+
+# testing mount_angle feature
+def test_18():
+    m1 = np.array([0, 0, 0])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angle = np.array([0,25,20])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    assert_allclose(leg.inverse(np.array([0, 0, -1]))[1:],
+                    np.array([-90+25, -90+20]), rtol=RTOL, atol=ATOL)
+
+
+def test_19():
+    m1 = np.array([0, 0, 0.2])
+    a1 = np.array([0.4, 0, 0])
+    a2 = np.array([1.2, 0, 0])
+    a3 = np.array([2.3, 0, 0])
+    mount_angle = np.array([0, 0, 0])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    assert_allclose(leg.inverse(np.array([0.4, 0, 3.7])),
+                    np.array([0, 90, 0]), rtol=RTOL, atol=ATOL)
+
+
+def test_20():
+    m1 = np.array([0, 0, 0.2])
+    a1 = np.array([1.7, 0, 0])
+    a2 = np.array([1.2, 0, 0])
+    a3 = np.array([2.3, 0, 0])
+    mount_angle = np.array([10,100,20])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    angle_1 = 75.14
+    assert_allclose(leg.inverse(np.array([1.7 * np.cos(np.deg2rad(angle_1)),
+                                          1.7 * np.sin(np.deg2rad(angle_1)),
+                                          3.7])),
+                    np.array([angle_1, 90, 0])+mount_angle, rtol=RTOL, atol=ATOL)
+
+
+def test_21():
+    m1 = np.array([0, 0, 0.1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([np.sqrt(2), 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angle = np.array([0,25,90])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    assert_allclose(leg.inverse(np.array([3, 0, 1.1])),
+                    np.array([0, 45, -45])+mount_angle, rtol=RTOL, atol=ATOL)
+
+
+def test_22():
+    m1 = np.array([0, 0, 0.1])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([np.sqrt(2), 0, 0])
+    mount_angle = np.array([0,10,45])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    assert_allclose(leg.inverse(np.array([2, 0, 2.1])),
+                    np.array([0, 90, -45])+mount_angle, rtol=RTOL, atol=ATOL)
+
+
+def test_23():
+    m1 = np.array([0, 0, 0])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1, 0, 0])
+    mount_angle = np.array([0, 0.01,0.03])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    assert_allclose(leg.inverse(np.array([1, 0, -2])),
+                    np.array([0, -90, 0])+mount_angle, rtol=RTOL, atol=ATOL)
+
+
+def test_24():
+    m1 = np.array([0, 0, 0.2])
+    a1 = np.array([1, 0, 0])
+    a2 = np.array([1, 0, 0])
+    a3 = np.array([1.4, 0, 0])
+    mount_angle = np.array([0,0,70])
+    leg = KinematicsSolver(m1, a1, a2, a3, mount_angle)
+    assert_allclose(leg.inverse(np.array([1, 0, -2.2])),
+                    np.array([0, -90, 0])+mount_angle, rtol=RTOL, atol=ATOL)

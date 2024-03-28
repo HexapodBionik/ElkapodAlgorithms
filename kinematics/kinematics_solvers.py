@@ -1,15 +1,15 @@
 import numpy as np
 from .kinematics_utils import (
-        homogeneous_transform_matrix,
-        rot_z, rot_x,
-        adjust_float_point_error
+    homogeneous_transform_matrix,
+    rot_z, rot_x,
+    adjust_float_point_error
 )
 from .kinematics_exceptions import (
-        InvalidInitVectorElements,
-        InvalidInitVectorShape,
-        InvalidInitVectorLength,
-        InvalidInitVector,
-        PointOutOfReach
+    InvalidInitVectorElements,
+    InvalidInitVectorShape,
+    InvalidInitVectorLength,
+    InvalidInitVector,
+    PointOutOfReach
 )
 
 
@@ -21,7 +21,7 @@ class KinematicsSolver:
     """
 
     def __init__(self, m1: np.ndarray, a1: np.ndarray,
-                 a2: np.ndarray, a3: np.ndarray):
+                 a2: np.ndarray, a3: np.ndarray, mount_angles: np.ndarray = np.array([0, 0, 0])):
         """
         @param m1: Translation from world origin to J1
         @param a1: Link 1 (between J1 and J2)
@@ -33,6 +33,7 @@ class KinematicsSolver:
         self.a1 = a1
         self.a2 = a2
         self.a3 = a3
+        self.mount_angles = mount_angles
 
     @staticmethod
     def _check_vector_dimensions(vector: np.ndarray) -> None:
@@ -100,6 +101,18 @@ class KinematicsSolver:
 
         self._m1 = new_m1
 
+    @property
+    def mount_angles(self) -> np.ndarray:
+        return self._mount_angle
+
+    @mount_angles.setter
+    def mount_angles(self, new_angles: np.ndarray) -> None:
+        self._check_vector_dimensions(new_angles)
+        if all(angle >= 0 for angle in new_angles):
+            self._mount_angle = new_angles
+        else:
+            raise InvalidInitVector("No anlge provided can be negative")
+
     def forward(self, q: np.ndarray) -> np.ndarray:
         """
         Forward Kinematics
@@ -107,10 +120,10 @@ class KinematicsSolver:
         @param q: Vector of joint angles [q1,q2,q3] in degrees
         @return: Position of leg's foot center point as [x,y,z]
         """
-        q_rad = [np.deg2rad(x) for x in q]
+        q_rad = np.deg2rad(q-self.mount_angles)
 
         rot_0_1 = rot_z(q_rad[0])
-        rot_1_2 = rot_x(np.pi/2) @ rot_z(q_rad[1])
+        rot_1_2 = rot_x(np.pi / 2) @ rot_z(q_rad[1])
         rot_2_3 = rot_z(q_rad[2])
         rot_3_4 = rot_z(0)
 
@@ -143,22 +156,22 @@ class KinematicsSolver:
         y = p[1]
         z = p[2]
 
-        q1 = np.arctan(y/x) if x else np.sign(y)*np.pi/2
+        q1 = np.arctan(y / x) if x else np.sign(y) * np.pi / 2
 
         span = (np.sign(x) if x else 1) * \
-            np.sqrt(x ** 2 + y ** 2) - self._a1[0]
+               np.sqrt(x ** 2 + y ** 2) - self._a1[0]
         z = z - self._m1[2] - self._a1[2]
 
         P = np.sqrt(span ** 2 + z ** 2)
 
         if np.isclose(0, P, 1e-9):
             if self.a2[0] != self.a3[0]:
-                raise PointOutOfReach(f"Given point {x,y,z} cannot be reached")
+                raise PointOutOfReach(f"Given point {x, y, z} cannot be reached")
             else:
                 q2 = 0
         else:
             argQ2 = (P ** 2 + self._a2[0] ** 2 - self._a3[0] ** 2) / \
-                (2 * P * self._a2[0])
+                    (2 * P * self._a2[0])
 
             q2 = -np.pi if z == 0 and span < 0 else np.arctan2(z, span)
             q2 += np.arccos(adjust_float_point_error(argQ2))
@@ -168,4 +181,5 @@ class KinematicsSolver:
 
         q3 = np.arccos(adjust_float_point_error(argQ3)) - np.pi
 
-        return np.array([np.rad2deg(x) for x in [q1, q2, q3]])
+        return np.rad2deg(np.array([q1, q2, q3])) + self.mount_angles
+
