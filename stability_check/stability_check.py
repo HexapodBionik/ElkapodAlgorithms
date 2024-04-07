@@ -19,6 +19,6 @@ class StabilityCheck:
         if(len([pnt for pnt in polygon_points if (pnt[0] == 0 and pnt[1] == 0)])):
             return False
         minimal_distance = calculate_minimal_distance_from_edge([0,0], polygon_points)
-        if minimal_distance < self.stability_margin:
-            False
+        if minimal_distance <= self.stability_margin:
+            return False
         return True
