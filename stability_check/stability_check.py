@@ -1,6 +1,9 @@
 import numpy as np
 from .stability_math import lowest_z_coordinates, convex_polygon_points, calculate_minimal_distance_from_edge
 
+    """
+    AAAA
+    """
 
 class StabilityCheck:
     def __init__(self, stability_margin: float):

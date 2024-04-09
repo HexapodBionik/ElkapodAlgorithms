@@ -14,6 +14,9 @@ def is_counter_clockwise(p1, p2, p3) -> bool:
 
 
 def convex_polygon_points(coordinates) -> list:
+    """
+    Solution to Convex Hull problem using Jarvis' March algorithm
+    """
     n = len(coordinates)
     coordinates = np.array(coordinates)
     polygon_vertices = [None] * n
