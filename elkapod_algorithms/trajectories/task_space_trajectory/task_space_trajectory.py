@@ -1,5 +1,5 @@
 import numpy as np
-from kinematics.kinematics_solvers import KinematicsSolver
+from elkapod_algorithms.kinematics.kinematics_solvers import KinematicsSolver
 
 
 class TaskSpaceTrajectory:
