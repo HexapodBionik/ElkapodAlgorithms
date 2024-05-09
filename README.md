@@ -4,7 +4,7 @@
 
 The Kinematics project is a Python implementation of forward and reverse kinematics for robotic arms in "Hexapod" robot. The module includes essential functions for transforming matrices for translation and rotation in three-dimensional space, normalizing vectors in the special Euclidean group SE3, and a `RoboticArm` class modeling a simple three-segment robotic arm with servo joints.
 
-![alt text](image.png)
+![alt text](docs/images/image.png)
 
 The codebase is succinct and prioritizes efficiency and precision through the use of the NumPy library for matrix operations and the math module for mathematical computations.
 
