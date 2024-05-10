@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "elkapod_algorithms"
 version = "1.0.0"
-authors = ["Elkapod Bionik <hexapod.bionik@gmail.com>"]
+license = {file = "LICENSE"}
 description = "Algorithms used in Elkapod walking robot"
+authors = ["Elkapod Bionik <hexapod.bionik@gmail.com>"]
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -17,6 +18,7 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.10"
 numpy = ">=1.2"
+pytest = ">=6.2.5"
 
 [tool.poetry.dev-dependencies]
 

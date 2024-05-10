@@ -1,45 +1,39 @@
-# Kinematics
+# ElkapodAlgorithms package
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Python Version](https://img.shields.io/badge/python-3.10-blue.svg)
 
 ## Overview
+This project and python package associated with it hosts all self-written algorithms used in the Elkapod hexapod robot which is developed at KNR "Bionik" student research group at the faculty of Electronics and Information Technology, Warsaw University of Technology.
+## Table of Contents
+* [Installation](#installation)
+* [Subpackages](#subpackages)
+  * [Kinematics](#kinematics)
+* [Running tests](#running-tests)
 
-The Kinematics project is a Python implementation of forward and reverse kinematics for robotic arms in "Hexapod" robot. The module includes essential functions for transforming matrices for translation and rotation in three-dimensional space, normalizing vectors in the special Euclidean group SE3, and a `RoboticArm` class modeling a simple three-segment robotic arm with servo joints.
+
+
+## Installation
+To install the package run these commands from the parent directory
+```bash
+git clone https://github.com/HexapodBionik/ElkapodAlgorithms.git
+pip install ElkapodAlgorithms/
+```
+
+## Subpackages
+### Kinematics
+The Kinematics subpackage is a python implementation of forward and inverse kinematics for legs in Elkapod robot which could be seen as simple manipulators with 3DoF. 
+
 
 ![alt text](docs/images/image.png)
 
-The codebase is succinct and prioritizes efficiency and precision through the use of the NumPy library for matrix operations and the math module for mathematical computations.
 
-## Files in the Project
 
-- `kinematics.py`: Central module providing kinematics functionality.
-
-- `test_kinematics.py`: Unit tests module for verifying the correctness of the kinematic algorithms.
-
-## Installation
-
-This project requires Python 3 and the `numpy` library. You can install the dependencies by running:
+## Running tests
+To run unit tests, navigate to the project's root directory and execute:
 
 ```bash
-pip install numpy
+python -m pytest
 ```
 
-## Usage
 
-To make use of the kinematics module, you can import it in your existing project or run it standalone for custom computations.
 
-```python
-from MotionPlanning.kinematics.kinematics_solvers import KinematicsSolver
-```
-
-### Main Features
-- **Forward Kinematics:** The `RoboticArm` class allows the user to simulate a three-segment robotic arm with the method `forward(q1, q2, q3)`
-- **Reverse Kinematics:** The `RoboticArm` class allows the user to compute angles in three-segment robotic arm in certain position. It can be done with the method `reverse(v)`
-
-## Running Tests
-
-To run unit tests, navigate to the root directory of the project and execute:
-
-```bash
-pytest
-```
-
-Please ensure that your Python environment has the required packages installed.
