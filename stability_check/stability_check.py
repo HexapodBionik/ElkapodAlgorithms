@@ -1,11 +1,15 @@
 import numpy as np
 from .stability_math import lowest_z_coordinates, convex_polygon_points, calculate_minimal_distance_from_edge
 
-    """
-    AAAA
-    """
-
 class StabilityCheck:
+    """
+    Class responsible for checking if center of mass is within polygon of stability.
+    - It has one attribute (passed in the constructor) - stability_margin - defining
+    how far from the edges center of mass has to be to be classified as stable
+    - Has getter and setter for stability_margin
+    - Has function check_stability which returns True if parameters are classified as stable
+    (otherwise returns false)
+    """
     def __init__(self, stability_margin: float):
         self.stability_margin = stability_margin
     
