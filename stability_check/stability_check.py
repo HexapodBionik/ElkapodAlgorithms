@@ -10,7 +10,7 @@ class StabilityCheck:
     - Has function check_stability which returns True if parameters are classified as stable
     (otherwise returns false)
     """
-    def __init__(self, stability_margin: float):
+    def __init__(self, stability_margin: float = 0):
         self.stability_margin = stability_margin
     
     def set_margin(self, new_margin: float) -> None:
@@ -29,3 +29,14 @@ class StabilityCheck:
         if minimal_distance <= self.stability_margin:
             return False
         return True
+    
+    def check_stability_with_minimal_distance(self, legs_coordinates: np.ndarray) -> bool:
+        touching_points = lowest_z_coordinates(legs_coordinates)
+        touching_points.append(np.array([0,0]))
+        polygon_points = convex_polygon_points(touching_points)
+        if(len([pnt for pnt in polygon_points if (pnt[0] == 0 and pnt[1] == 0)])):
+            return False, None
+        minimal_distance = calculate_minimal_distance_from_edge([0,0], polygon_points)
+        if minimal_distance <= self.stability_margin:
+            return False, minimal_distance
+        return True, minimal_distance
