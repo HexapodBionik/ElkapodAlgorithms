@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "elkapod_algorithms"
 version = "1.0.0"
-license = {file = "LICENSE"}
+license = "MIT"
 description = "Algorithms used in Elkapod walking robot"
 authors = ["Elkapod Bionik <hexapod.bionik@gmail.com>"]
 readme = "README.md"
