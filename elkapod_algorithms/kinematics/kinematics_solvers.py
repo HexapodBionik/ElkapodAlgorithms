@@ -151,8 +151,8 @@ class KinematicsSolver:
 
         P = np.sqrt(span ** 2 + z ** 2)
 
-        if np.isclose(0, P, 1e-9):
-            if self.a2[0] != self.a3[0]:
+        if P >= 0.3:
+            if self._a2[0] != self._a3[0]:
                 raise PointOutOfReach(f"Given point {x,y,z} cannot be reached")
             else:
                 q2 = 0
